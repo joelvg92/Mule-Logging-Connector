@@ -1,1 +1,1 @@
-# Mule-Logging-Connector
+# Mule-logging-connector
