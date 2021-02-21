@@ -36,7 +36,7 @@ public class CustomLoggerOperations {
 	 * to perform some action.
 	 */
 	@MediaType(value = ANY, strict = false)
-	@DisplayName("GAF Custom Logger")
+	@DisplayName("Mule Custom Logger")
 	public void customFileLogger(@Config CustomLoggerConfiguration configuration,
 			@Connection CustomLoggerConnection connection,
 			@ParameterGroup(name = "Log Details") CustomLogParameters logParameters,			
