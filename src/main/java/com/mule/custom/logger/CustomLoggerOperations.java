@@ -31,6 +31,8 @@ public class CustomLoggerOperations {
 	@Inject
 	private TransformationService transformationService;
 
+	protected transient Logger logger;
+
 	/**
 	 * Example of an operation that uses the configuration and a connection instance
 	 * to perform some action.
@@ -44,8 +46,7 @@ public class CustomLoggerOperations {
 
 	    try
 	    {
-
-		Logger logger = connection.getLOGGER();
+	    	logger = connection.getLogger(logParameters.getCategory());
 
 
 		Map<String, Object> logMsg = new LinkedHashMap<String, Object>();
@@ -77,8 +78,7 @@ public class CustomLoggerOperations {
 		if(logParameters.getAdditionalProperties()!=null && !logParameters.getAdditionalProperties().isEmpty()){
 			CustomLoggerUtils.validateMap(logParameters.getAdditionalProperties(),logMsg);
 		}
-		
-		//ObjectMessage obj = new ObjectMessage(logMsg);
+
 		String json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(logMsg);
 		logger.log(getLogLevel(logParameters.getLevel()), json);
 		callback.success(Result.<Void,Void>builder().build());
@@ -94,9 +94,6 @@ public class CustomLoggerOperations {
 		Level returnLevel;
 
 		switch (level) {
-		case "INFO":
-			returnLevel = Level.INFO;
-			break;
 		case "DEBUG":
 			returnLevel = Level.DEBUG;
 			break;
