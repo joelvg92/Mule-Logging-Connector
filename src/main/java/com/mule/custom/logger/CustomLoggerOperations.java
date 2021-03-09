@@ -63,9 +63,10 @@ public class CustomLoggerOperations {
 		CustomLoggerUtils.validateKey(logMsg,logParameters.getLevel(),"level");
 		CustomLoggerUtils.validateKey(logMsg,logParameters.getCorrelationId(),"correlationId");
 		CustomLoggerUtils.validateKey(logMsg,logParameters.getMessage(),"message");
+		String stringifyPayload = null;
 		try {
 			if (logParameters.getPayload() != null) {
-				String stringifyPayload = (String) transformationService.transform(logParameters.getPayload(), DataType.fromType(logParameters.getPayload().getClass()), TEXT_STRING);
+				stringifyPayload = (String) transformationService.transform(logParameters.getPayload(), DataType.fromType(logParameters.getPayload().getClass()), TEXT_STRING);
 				logMsg.put("payload", stringifyPayload.replaceAll(" ", ""));
 			}
 		}catch (Exception e){
@@ -79,10 +80,14 @@ public class CustomLoggerOperations {
 			CustomLoggerUtils.validateMap(logParameters.getAdditionalProperties(),logMsg);
 		}
 
-		String json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(logMsg);
-		logger.log(getLogLevel(logParameters.getLevel()), json);
+		String finalJson = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(logMsg);
+		if(logParameters.getPrettyPrint() == true){
+			logger.log(getLogLevel(logParameters.getLevel()),finalJson);
+			logger.log(getLogLevel(logParameters.getLevel()),"Formatted Payload:"+stringifyPayload);
+		}else{
+			logger.log(getLogLevel(logParameters.getLevel()),finalJson);
+		}
 		callback.success(Result.<Void,Void>builder().build());
-		
 	    }
 	    catch(Exception e)
 	    {

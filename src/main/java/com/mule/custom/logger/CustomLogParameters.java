@@ -24,12 +24,19 @@ public class CustomLogParameters {
 	private String message;
 
 
+
 	@Parameter
 	@Optional
 	@DisplayName("Payload")
 	@Summary("Payload to be logged")
 	@Example("#[payload]")
 	private Object payload;
+
+	@Parameter
+	@Optional(defaultValue = "#[false]")
+	@DisplayName("Enable pretty print")
+	@Summary("If the payload needs to be printed in proper format")
+	private boolean isPrettyPrint;
 
 	@Parameter
 	@DisplayName("Step")
@@ -103,5 +110,9 @@ public class CustomLogParameters {
 
 	public String getStep() {
 		return step;
+	}
+
+	public boolean getPrettyPrint() {
+		return isPrettyPrint;
 	}
 }
