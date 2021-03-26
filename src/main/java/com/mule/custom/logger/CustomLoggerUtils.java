@@ -3,15 +3,7 @@ package com.mule.custom.logger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.util.List;
 import java.util.Map;
 
 public class CustomLoggerUtils {
@@ -24,6 +16,14 @@ public class CustomLoggerUtils {
     public static void validateMap(Map<String,String> inputMap,Map<String,Object> resultMap){
         for(Map.Entry<String,String> input: inputMap.entrySet()){
             if(input.getValue() !=null) {
+                resultMap.put(input.getKey(), input.getValue());
+            }
+        }
+    }
+
+    public static void validateList(List<Properties> inputList, Map<String,Object> resultMap){
+        for(Properties input:inputList){
+            if(input.getKey() !=null && input.getValue() !=null) {
                 resultMap.put(input.getKey(), input.getValue());
             }
         }

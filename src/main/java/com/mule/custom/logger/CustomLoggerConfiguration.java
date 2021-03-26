@@ -7,6 +7,7 @@ import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,9 +41,9 @@ public class CustomLoggerConfiguration {
 	@Parameter
 	@Optional
 	@DisplayName("Additional Properties")
-	private Map<String, String> additionalProperties;
+	private List<Properties> additionalProperties;
 
-	public Map<String, String> getAdditionalProperties() {
+	public List<Properties> getAdditionalProperties() {
 		return additionalProperties;
 	}
 

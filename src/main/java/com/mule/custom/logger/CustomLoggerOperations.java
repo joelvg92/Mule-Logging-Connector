@@ -55,7 +55,7 @@ public class CustomLoggerOperations {
 		CustomLoggerUtils.validateKey(logMsg,configuration.getSoftware(),"software");
 		CustomLoggerUtils.validateKey(logMsg,configuration.getAppVersion(),"software_version");
 		if(configuration.getAdditionalProperties()!=null && !configuration.getAdditionalProperties().isEmpty()){
-			CustomLoggerUtils.validateMap(configuration.getAdditionalProperties(),logMsg);
+			CustomLoggerUtils.validateList(configuration.getAdditionalProperties(),logMsg);
 		}
 
 
@@ -77,7 +77,7 @@ public class CustomLoggerOperations {
 		CustomLoggerUtils.validateKey(logMsg,logParameters.getErrorCode(),"error_code");
 		CustomLoggerUtils.validateKey(logMsg,logParameters.getCategory(),"category");
 		if(logParameters.getAdditionalProperties()!=null && !logParameters.getAdditionalProperties().isEmpty()){
-			CustomLoggerUtils.validateMap(logParameters.getAdditionalProperties(),logMsg);
+			CustomLoggerUtils.validateList(logParameters.getAdditionalProperties(),logMsg);
 		}
 
 		String finalJson = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(logMsg);

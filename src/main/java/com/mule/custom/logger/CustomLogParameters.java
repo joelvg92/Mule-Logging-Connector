@@ -7,7 +7,7 @@ import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.extension.api.annotation.values.OfValues;
 
-import java.util.Map;
+import java.util.List;
 
 public class CustomLogParameters {
 
@@ -74,9 +74,9 @@ public class CustomLogParameters {
 	@Parameter
 	@Optional
 	@DisplayName("Additional Properties")
-	private Map<String, String> additionalProperties;
+	private List<Properties> additionalProperties;
 
-	public Map<String, String> getAdditionalProperties() {
+	public List<Properties> getAdditionalProperties() {
 		return additionalProperties;
 	}
 
@@ -115,4 +115,5 @@ public class CustomLogParameters {
 	public boolean getPrettyPrint() {
 		return isPrettyPrint;
 	}
+
 }
